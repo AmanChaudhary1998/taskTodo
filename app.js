@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./db/db');
 const taskRoute = require('./routes/task');
+const userRoute = require('./routes/users');
 
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json({extended:false}))
 //     res.send("Todo Task");
 // });
 
+app.use('/user',userRoute);
 app.use('/',taskRoute);
 
 const PORT = process.env.PORT || 3000;

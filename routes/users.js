@@ -8,14 +8,14 @@ router.post('/registration',async(req,res)=>{
         const {name,email,password} = req.body
         console.log(req.body);
 
-        let user = await Users.findById({email});
+        let user = await Users.findOne({email});
 
         if(user)
         {
             return res.json("User already exists");
         }
 
-        const user = new Users({
+        user = new Users({
             name,
             email,
             password
@@ -41,7 +41,7 @@ router.post('/login', async(req,res)=>{
             return res.json("Invalid Credentials");
         }
         return res.json("User loggedIn Successfully");
-        
+
     } catch (error) {
         console.error(error.message)
     }
