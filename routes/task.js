@@ -45,8 +45,6 @@ router.put('/task/:id', async(req,res)=>{
         console.log(taskId);
         const newTask = await Task.findById(taskId);
         const {task,status,subTask} = req.body;
-        console.log(req.body);
-        console.log(newTask);
         newTask.task = task;
         newTask.status = status;
         newTask.subTask = subTask;
