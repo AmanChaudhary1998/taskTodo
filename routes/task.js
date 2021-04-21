@@ -42,9 +42,16 @@ router.delete('/task/:id', async(req,res)=>{
 router.put('/task/:id', async(req,res)=>{
     try {
         const taskId = req.params.id;
-        const updatedTask = req.body;
-        const result = await Task.findOneAndUpdate({_id:taskId,updatedTask})
-        return res.json(result);
+        console.log(taskId);
+        const newTask = await Task.findById(taskId);
+        const {task,status,subTask} = req.body;
+        console.log(req.body);
+        console.log(newTask);
+        newTask.task = task;
+        newTask.status = status;
+        newTask.subTask = subTask;
+        await newTask.save();
+        return res.json(newTask);
     } catch (error) {
         console.error(error.message)
     }
